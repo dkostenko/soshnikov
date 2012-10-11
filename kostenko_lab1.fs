@@ -21,19 +21,17 @@ let rec mySin (x, n) =
     | n -> mySin(x, n - 1.0) + pow(-1.0, n - 1.0) * pow(2.0, 2.0 * n - 1.0) * pow(x, (n * 2.0)) / factorial(2.0 * n)
     
 // Вывод с помощью получения значения за счет предыдущего
-let rec mySinPred (x, n) =
+let rec mySinPred (x, n, pred) =
   match n with
     | 0.0 -> 0.0
-    | n -> mySinPred(x, n - 1.0) + pow(-1.0, n - 1.0) * 4.0 * x * x / (10.0 - n - 1.00001) * (10.0 - n - 2.00001)
+    | pred -> mySinPred(x, n - 1.0, pred) + pow(-1.0, n - 1.0) * 4.0 * x * x / ((n + 2.0))
 
 // вывод Тейлора
 let mySinPrint = [ for i in 0.0 .. 0.1 .. 1.0 -> (i, mySin(i, 10.0)) ]
 
 // вывод значения от предыдущего
-let mySinPredPrint = [for i in 0.0 .. 0.1 .. 1.0 -> (i, mySinPred(i, 10.0)) ]
+let mySinPredPrint = [for i in 0.0 .. 0.1 .. 1.0 -> (i, mySinPred(i, 9.0, 2.0 * i * i / 4.0)) ]
 
 
 // sin(x)^2
 let tableOfFunctionValues = [ for i in 0.0 .. 0.1 .. 1.0 -> (i, sin(i)*sin(i)) ]
-
-
