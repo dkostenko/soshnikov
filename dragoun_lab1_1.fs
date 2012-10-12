@@ -21,16 +21,16 @@ let rec mySh (x, n) =
     | n -> mySh(x, n - 1.0) + pow(x, 2.0 * n - 1.0) / factorial(2.0 * n - 1.0)
     
 // Вывод с помощью получения значения за счет предыдущего
-let rec mySinPred (x, n, pred) =
+let rec myShPred (x, n) =
   match n with
-    | 0.0 -> 0.0
-    | pred -> mySinPred(x, n-1.0, pred)  + pred * x * x / ((n+1.0) * (n+2.0))
+    | 1.0 -> x
+    | n -> myShPred(x, n-1.0) + (x * x * x) / ((n+1.0) * (n+2.0))
 
 // вывод Тейлора
-let mySinPrint = [ for i in 0.0 .. 0.1 .. 1.0 -> (i, mySh(i, 10.0)) ]
+let myShPrint = [ for i in 0.0 .. 0.1 .. 1.0 -> (i, mySh(i, 10.0)) ]
 
 // вывод значения от предыдущего
-let mySinPredPrint = [for i in 0.0 .. 0.1 .. 1.0 -> (i, mySinPred(i, 20.0, 0.0)) ]
+let myShPredPrint = [for i in 0.0 .. 0.1 .. 1.0 -> (i, myShPred(i, 10.0)) ]
 
 // sh(x)
 let tableOfFunctionValues = [ for i in 0.0 .. 0.1 .. 1.0 -> (i, sinh(i)) ]
